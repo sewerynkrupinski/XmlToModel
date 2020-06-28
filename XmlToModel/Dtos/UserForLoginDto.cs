@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace XmlToModel.Dtos
 {
-    public class RegisterNewUserDto
+    public class UserForLoginDto
     {
-        public string UserName { get; set; }
+        public string Login { get; set; }
         public string Password { get; set; }
     }
 }

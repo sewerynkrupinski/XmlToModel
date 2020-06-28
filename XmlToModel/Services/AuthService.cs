@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,16 +17,30 @@ namespace XmlToModel.Services
         {
             _context = context;
         }
-        public Task<User> Login(string username, string password)
+        public async Task<User> Login(string username, string password)
         {
-            throw new NotImplementedException();
+            if (!await UserExists(username))
+            {
+                throw new Exception("Podany login jest nieprawidłowy");
+            }
+            
+            var user = await _context.Users.Where(x => x.Username == username).FirstOrDefaultAsync();
+
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            {
+                throw new Exception("Błędne hasło");
+            }
+
+            return user;
         }
 
-        public async Task<User> Register(User user, string password)
+        public async Task<User> Register(string userName, string password)
         {
+            User user = new User();
             byte[] passwordHash, passwordSalt;
             CreatePasswordHashSalt(password, out passwordHash, out passwordSalt);
 
+            user.Username = userName;
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
@@ -43,9 +58,26 @@ namespace XmlToModel.Services
             }
         }
 
-        public Task<bool> UserExists(string username)
+        public async Task<bool> UserExists(string username)
         {
-            throw new NotImplementedException();
+            return await _context.Users.AnyAsync(x => x.Username == username);
+        }
+
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+                for (int i = 0; i < computedHash.Length; i++)
+                {
+                    if (computedHash[i] != passwordHash[i])
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
         }
     }
 }
