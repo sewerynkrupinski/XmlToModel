@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlToModel", "XmlToModel\XmlToModel.csproj", "{1FB1DCA6-B496-47C1-84FC-5F2E41275C7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FB1DCA6-B496-47C1-84FC-5F2E41275C7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FB1DCA6-B496-47C1-84FC-5F2E41275C7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FB1DCA6-B496-47C1-84FC-5F2E41275C7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FB1DCA6-B496-47C1-84FC-5F2E41275C7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15E99265-BE8E-4C8E-A17D-620E3D9E38FF}
+	EndGlobalSection
+EndGlobal
