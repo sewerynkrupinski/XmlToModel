@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -29,7 +30,8 @@ namespace XmlToModel.Controllers
             _authService = authService;
             _configuration = configuration;
         }
-
+        
+        [AllowAnonymous]
         [HttpPost("[action]")]
         public async Task<IActionResult> RegisterNewUser(RegisterNewUserDto registerNewUserDto)
         {
@@ -37,6 +39,7 @@ namespace XmlToModel.Controllers
             return StatusCode(201);
         }
 
+        [AllowAnonymous]
         [HttpPost("[action]")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {

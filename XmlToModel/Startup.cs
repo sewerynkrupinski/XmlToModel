@@ -22,20 +22,32 @@ namespace XmlToModel
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                   .SetBasePath(env.ContentRootPath)
+                   .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                   .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                   .AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
         
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options =>
-            options.AddPolicy("CorsPolicy",
-            builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+            {
+                options.AddPolicy("CorsPolicy",
+                builder => builder.WithOrigins("192.168.53.105")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials()
+                );
+            });
+            
             services.AddControllers();
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAuthService, AuthService>();
-            
+            services.AddHttpContextAccessor();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -50,7 +62,7 @@ namespace XmlToModel
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Barkley", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "XmlToModel", Version = "v1" });
 
                 var securitySchema = new OpenApiSecurityScheme
                 {
@@ -86,17 +98,17 @@ namespace XmlToModel
             }
 
             app.UseCors("CorsPolicy");
-
+            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action}/{id?}"
+                    );
             });
         }
     }
