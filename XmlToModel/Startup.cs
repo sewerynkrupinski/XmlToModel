@@ -47,6 +47,7 @@ namespace XmlToModel
             services.AddControllers();
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IXmlService, XmlService>();
             services.AddHttpContextAccessor();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
