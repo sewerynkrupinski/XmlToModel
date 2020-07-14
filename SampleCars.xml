@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Cars>
+	<Car>
+		<Id>1</Id>
+		<Make>
+			<Name>Mitsubishi</Name>
+			<Model>
+				<Name>Lancer</Name>
+				<Option>Instyle</Option>
+			</Model>
+		</Make>
+		<Engine>
+			<FuelType>Gas</FuelType>
+			<Power>
+				<HP>140</HP>
+				<kW>104,40</kW>
+			</Power>
+			<Capacity>1,8 litre</Capacity>
+			<Transmission>Manual</Transmission>
+		</Engine>
+	</Car>
+	<Car>
+		<Id>2</Id>
+		<Make>
+			<Name>Opel</Name>
+			<Model>
+				<Name>Corsa</Name>
+				<Option>Friend</Option>
+			</Model>
+		</Make>
+		<Engine>
+			<FuelType>Diesel</FuelType>
+			<Power>
+				<HP>90</HP>
+				<kW>67,11</kW>
+			</Power>
+			<Capacity>1,4 litre</Capacity>
+			<Transmission>Automatic</Transmission>
+		</Engine>
+	</Car>
+</Cars>
+
