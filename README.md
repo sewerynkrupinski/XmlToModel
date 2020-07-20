@@ -5,6 +5,7 @@
 * [Main information](#main-information)
 * [Technologies](#technologies)
 * [Setup](#setup)
+* [How Does It Work](#how-does-it-work)
 * [Capabilities](#capabilities)
 * [Status](#status)
 * [Author](#author)
@@ -38,6 +39,10 @@ The application includes JWT authentication and Swagger UI.
 12. Click "Auhorize" button using Swagger UI
 13. Paste the token and click "Authorize"
 14. Enjoy the app!
+
+## How Does It Work
+![Scheme] (/images/logo.png)
+Format: ![Alt Text](url)
 
 ## Capabilities
 Application	capabilities:
