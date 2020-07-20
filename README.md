@@ -41,8 +41,15 @@ The application includes JWT authentication and Swagger UI.
 14. Enjoy the app!
 
 ## How Does It Work
-![Scheme] (/images/logo.png)
-Format: ![Alt Text](url)
+![Scheme](https://github.com/sewerynkrupinski/XmlToModel/blob/master/scheme.png)
+1. Create your pattern class (XmlPattern) - the red arrow
+2. Create your main class named the same as your xml root (Cars) - the red arrow
+3. Create an array of subclasses (Car[]) since your root contains many Car's - the red arrow
+4. Your car contains: Id, Make and Engine then create properties of your Car class: string Id, class Make, class Engine - the red arrow
+5. Your Make node contais Name and Model so create properties of Make: string Name, class Model - the green arrow
+6. Your Model node contais Name and Option, so create properties of Model: string Name, string Option - the blue arrow
+7. Etc etc.
+8. This way you create a structure of classes that is mapped as a class and it's properties, which can also be classes!
 
 ## Capabilities
 Application	capabilities:
