@@ -41,7 +41,7 @@ The application includes JWT authentication and Swagger UI.
 14. Click "uploadXmlFiles" method, then Try it out
 15. Click "Add item"
 16. Select the sample xml file
-(17. You can set some breakpoints in the XMLService to see the C# object)
+17. You can set some breakpoints in the XMLService to see the C# object
 18. Click "Execute"
 19. See the file as Json Dto
 
