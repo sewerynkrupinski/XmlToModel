@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using XmlToModel.Dtos;
 using XmlToModel.Services;
 using static XmlToModel.Models.XmlPattern;
 
@@ -29,7 +30,7 @@ namespace XmlToModel.Controllers
             long size = files.Sum(f => f.Length);
             var loggedUser = User.Claims.ToList();
 
-            var models = new List<Cars>();
+            var models = new List<GetCarsDto>();
             foreach (var file in files)
             {
                 string uploadedFile = string.Empty;

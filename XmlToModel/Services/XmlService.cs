@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using XmlToModel.Dtos;
 using XmlToModel.Models;
 using static XmlToModel.Models.XmlPattern;
 
@@ -13,7 +15,14 @@ namespace XmlToModel.Services
 {
     public class XmlService : IXmlService
     {
-        public Cars CreateModel(string uploadedFile)
+        private readonly IMapper _mapper;
+
+        public XmlService(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
+
+        public GetCarsDto CreateModel(string uploadedFile)
         {
             var clearedXml = CleanXmlFile(uploadedFile);
             return DeserializeXmlFile(clearedXml);
@@ -32,12 +41,12 @@ namespace XmlToModel.Services
             return xmlFile;
         }
 
-        private Cars DeserializeXmlFile(XElement xmlFile)
+        private GetCarsDto DeserializeXmlFile(XElement xmlFile)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(Cars));
             string updatedStringFile = xmlFile.ToString();
             Cars xmlPattern = (Cars)serializer.Deserialize(new StringReader(updatedStringFile));
-            return xmlPattern;
+            return _mapper.Map<GetCarsDto>(xmlPattern);
         }
     }
 }
