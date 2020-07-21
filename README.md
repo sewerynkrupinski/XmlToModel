@@ -64,11 +64,8 @@ Application	capabilities:
 * Iporting xml file (use provided example)
 * Creating a c# class model that is based on the xml fie content
 
-To-do list:
-* Mapping a generated model to output dto using automapper
-
 ## Status
-Stable, working, new function are developed
+Stable, working
 
 ## Author
 Seweryn Krupiński
